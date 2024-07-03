@@ -32,7 +32,7 @@ UserSchema.methods.ispasswordCorrect = async function(password) {
 
 UserSchema.methods.generateRefreshToken = function() {
   try {
-    console.log('Generating token with secret:', process.env.REFRESH_TOKEN_SECRET);
+ 
     const token = jwt.sign(
       { _id: this._id },
       process.env.REFRESH_TOKEN_SECRET,

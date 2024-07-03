@@ -21,7 +21,7 @@ function Signup() {
 
   const navigate = useNavigate()
   const handleInputChange = (e) => {
-    console.log(formData);
+    
     setFormData((prevFormData) => ({
       ...prevFormData,
       [e.target.name]: e.target.value,

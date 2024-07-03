@@ -6,7 +6,7 @@ import { restrict } from '../middleware/authentication.js';
 
 const router = express.Router()
 
-router.get('/:useId',isAuthorized,restrict(["patient"]),getSingleUser)
+router.get('/:id',isAuthorized,restrict(["patient"]),getSingleUser)
 router.get('/',isAuthorized, getAllUser)
 router.put('/:id',isAuthorized,restrict(["patient"]), updateuser)
 router.delete('/:id',isAuthorized,restrict(["patient"]),deleteuser)

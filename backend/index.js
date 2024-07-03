@@ -44,4 +44,4 @@ dbConnection()
         console.log("mongodb connection error", error)
     })
 
-    console.log('Stripe Secret Key:', process.env.STRIPE_SECRET_KEY);
+    
