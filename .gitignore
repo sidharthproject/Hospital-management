@@ -2,8 +2,8 @@
 node_modules
 
 # Ignore .env files globally
-*.env
-*.env.local
+*/backend/config/.env
+*/frontend/.env.local
 
 # Ignore log files
 *.log
