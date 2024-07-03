@@ -1,4 +1,13 @@
-/backend/node_modules
-/backend/config/.env
-/frontend/node_modules
-/frontend/.env.local
+# Ignore node_modules directory globally
+node_modules/
+
+# Ignore .env files globally
+*.env
+*.env.local
+
+# Ignore log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
