@@ -5,8 +5,12 @@ import { BASE_URL} from '../../config.js';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
+
 function DoctorProfile({ doctorData }) {
+
     const token = useSelector((state) => state.auth.token);
+    const user = useSelector((state) => state.auth.user);
+ 
     const [formData, setFormData] = useState({
       name: '',
       password: '',
@@ -20,6 +24,7 @@ function DoctorProfile({ doctorData }) {
       experiences: [],
       timeSlots: [],
       about: '',
+
       photo: null,
       
     });
@@ -39,6 +44,7 @@ function DoctorProfile({ doctorData }) {
           timeSlots: doctorData.timeSlots || [],
           about: doctorData.about || '',
           photo: doctorData.photo || null,
+       
         });
       }
     }, [doctorData]);
@@ -56,7 +62,8 @@ function DoctorProfile({ doctorData }) {
       const data = await uploadImageToCloudinary(file);
       setFormData((prevFormData) => ({
         ...prevFormData,
-        photo: data?.url,
+        photo: data?.url
+    
       }));
     };
   
@@ -65,6 +72,7 @@ function DoctorProfile({ doctorData }) {
       try {
         const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
           method: 'PUT',
+          
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -72,10 +80,14 @@ function DoctorProfile({ doctorData }) {
           body: JSON.stringify(formData),
         });
         const result = await res.json();
+      
         if (!res.ok) {
           throw new Error(result.message);
+          
         }
+       
         toast.success(result.message);
+       console.log(result.data);
       } catch (error) {
         console.log(error);
       }

@@ -1,12 +1,18 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { BiMenu } from 'react-icons/bi'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { logout } from '../../store/authSlice.js';
+
 function Tabs({tab, setTab}) {
+
+  const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch()
   const navigate = useNavigate()
+ 
+  
   const logOutHandler = async () => {
     try {
       const response = await fetch('http://localhost:9000/api/v1/auth/logout', {

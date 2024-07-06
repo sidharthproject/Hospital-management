@@ -37,7 +37,7 @@ function Dashboard() {
                   </svg>
                   <span className='sr-only'>Info</span>
                   <div>
-                    To get approval please complete your profile. We&apos;ll review manually and approve within 3days
+                    To get approval please complete your profile. We&apos;ll review manually and approve within 3 days
                   </div>
                 </div>
               )}
@@ -56,7 +56,7 @@ function Dashboard() {
                         <h3 className="text-[22px] leading-9 font-bold text-headingColor mt-3">{data?.name}</h3>
                         <div className="flex items-center gap-[6px]">
                           <span className='flex items-center gap-[6px] text-headingColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold'>
-                            <img src={starIcon} alt="" />{data.averageRating}
+                            <img src={starIcon} alt="" />{data?.averageRating?.toFixed(1)}
                           </span>
                           <span className='text-textColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold'>
                             ({data.totalRating})
@@ -75,6 +75,7 @@ function Dashboard() {
                 )}
                 {tab === 'appointment' && <Appointment appointments={data.appointments}/>}
                 {tab === 'settings' && <DoctorProfile doctorData={data} />}
+                {tab === 'profile' && <DoctorProfile doctorData={data.isApproved} />}
               </div>
             </div>
           </div>

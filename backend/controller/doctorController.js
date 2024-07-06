@@ -1,19 +1,26 @@
 import { query } from "express"
 import { Doctor } from "../models/DoctorSchema.js"
 import { Booking } from "../models/BookingSchema.js"
-export const updatedoctor = async(req,res)=>{
-    const id = req.params.doctorId
-    
+import { login } from "./authController.js";
+export const updatedoctor = async (req, res) => {
+    const id = req.params.doctorId;
+
     try {
-        const updatedDoctor =  await Doctor.findByIdAndUpdate(id,{$set:req.body},{new:true})
-        res.status(200).json({success:true,message:"Successfully updated",data:updatedDoctor})
+        const updatedData = {
+            ...req.body,
+            isApproved: 'approved'  // Ensure the doctor is approved after the update
+        };
+
+        const updatedDoctor = await Doctor.findByIdAndUpdate(id, { $set: updatedData }, { new: true });
+        res.status(200).json({ success: true, message: "Successfully updated", data: updatedDoctor });
     } catch (error) {
-        res.status(500).json({success:false,message:"Failed to update"})
+        res.status(500).json({ success: false, message: "Failed to update" });
     }
-}
+};
 export const deletedoctor = async(req,res)=>{
     const id = req.params.doctorId
-
+console.log("deletedoctor",req.params);
+   
     try {
         Doctor.findByIdAndDelete(id,{$set:req.body},{new:true})
         res.status(200).json({success:true,message:"Successfully deleted"})
