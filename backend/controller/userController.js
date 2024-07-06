@@ -1,7 +1,7 @@
 import { User } from "../models/UserSchema.js";
 import { Booking } from "../models/BookingSchema.js";
 import { Doctor } from "../models/DoctorSchema.js";
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 
 export const updateuser = async (req, res) => {
