@@ -6,7 +6,17 @@ const initialState = {
   token: localStorage.getItem("token") || null
 };
 
+const isTokenExpired = (token) => {
+  if (!token) return true;
 
+  const expiryDate = (JSON.parse(atob(token.split('.')[1]))).exp * 1000;
+  return Date.now() > expiryDate;
+};
+if (isTokenExpired(localStorage.getItem("token"))) {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
+}
 export const authSlice = createSlice({
   name: "auth",
   initialState,
