@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
-  role: localStorage.getItem("role") || null,
-  token: localStorage.getItem("token") || null
+  user: null,
+  role: null,
+  token: null
 };
-
 
 export const authSlice = createSlice({
   name: "auth",
@@ -21,19 +20,11 @@ export const authSlice = createSlice({
       state.user = user;
       state.token = token;
       state.role = role;
-      // Set items in localStorage
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
     },
     logout: (state) => {
       state.user = null;
       state.role = null;
       state.token = null;
-      // Clear localStorage
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
     }
   }
 });
@@ -43,3 +34,4 @@ export const { loginStart, loginSuccess, logout } = authSlice.actions;
 
 // Export reducer
 export default authSlice.reducer;
+
