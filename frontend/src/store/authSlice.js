@@ -1,11 +1,9 @@
-// authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
 
 const initialState = {
-  user: null,
-  role: null,
-  token: Cookies.get("token") || null,
+  user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
+  role: localStorage.getItem("role") || null,
+  token: localStorage.getItem("token") || null
 };
 
 
@@ -23,17 +21,21 @@ export const authSlice = createSlice({
       state.user = user;
       state.token = token;
       state.role = role;
-      // Set cookie
-      Cookies.set("token", token, { expires: 7, secure: true, sameSite: "Strict" });
+      // Set items in localStorage
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
     },
     logout: (state) => {
       state.user = null;
       state.role = null;
       state.token = null;
-      // Clear cookie
-      Cookies.remove("token");
-    },
-  },
+      // Clear localStorage
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+    }
+  }
 });
 
 // Export actions
@@ -41,4 +43,3 @@ export const { loginStart, loginSuccess, logout } = authSlice.actions;
 
 // Export reducer
 export default authSlice.reducer;
-
