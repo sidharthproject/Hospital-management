@@ -8,7 +8,7 @@ const initialState = {
   token: Cookies.get("token") || null,
 };
 
-console.log(token);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
