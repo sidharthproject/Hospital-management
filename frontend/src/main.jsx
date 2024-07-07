@@ -1,57 +1,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
-import Home from './Pages/Home.jsx';
-import Services from './Pages/Services.jsx';
-import Login from './Pages/Login.jsx';
-import Signup from './Pages/Signup.jsx';
-import Contact from './Pages/Contact.jsx';
-import Doctors from './Pages/Doctors/Doctors.jsx';
-import DoctorDetails from './Pages/Doctors/DoctorDetails.jsx';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { store } from './store/store.js';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import MyAccount from './Dashboard/userAccount/MyAccount.jsx';
-import Dashboard from './Dashboard/doctorAccount/Dashboard.jsx';
-import ProtectedRoute from './Components/routes/ProtectedRoute.jsx';
+import App from './App';
+import Home from './Pages/Home';
+import Services from './Pages/Services';
+import Login from './Pages/Login';
+import Signup from './Pages/Signup';
+import Contact from './Pages/Contact';
+import Doctors from './Pages/Doctors/Doctors';
+import DoctorDetails from './Pages/Doctors/DoctorDetails';
+import MyAccount from './Dashboard/userAccount/MyAccount';
+import Dashboard from './Dashboard/doctorAccount/Dashboard';
+import ProtectedRoute from './Components/routes/ProtectedRoute';
+import { store } from './store/store';
+import './index.css';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      { path: '/', element: <Home /> },
-      { path: '/login', element: <Login /> },
-      { path: '/signup', element: <Signup /> },
-      { path: '/contact', element: <Contact /> },
-      { path: '/services', element: <Services /> },
-      { path: '/doctors', element: <Doctors /> },
-      { path: '/doctors/:id', element: <DoctorDetails /> },
-      {
-        path: '/users/profile/me',
-        element: (
-          <ProtectedRoute allowedRoles={['patient']}>
-            <MyAccount />
-          </ProtectedRoute>
-        )
-      },
-      {
-        path: '/doctors/profile/me',
-        element: (
-          <ProtectedRoute allowedRoles={['doctor']}>
-            <Dashboard />
-          </ProtectedRoute>
-        )
-      }
-    ]
-  }
-]);
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="services" element={<Services />} />
+            <Route path="doctors" element={<Doctors />} />
+            <Route path="doctors/:id" element={<DoctorDetails />} />
+            <Route
+              path="users/profile/me"
+              element={
+                <ProtectedRoute allowedRoles={['patient']}>
+                  <MyAccount />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="doctors/profile/me"
+              element={
+                <ProtectedRoute allowedRoles={['doctor']}>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
