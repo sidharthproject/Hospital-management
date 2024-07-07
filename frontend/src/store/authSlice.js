@@ -13,7 +13,7 @@ export const authSlice = createSlice({
     loginStart: (state) => {
       state.user = null;
       state.role = null;
-      state.token = null;
+      state.token =  Cookies.get("token") || null,
     },
     loginSuccess: (state, action) => {
       const { user, token, role } = action.payload;
