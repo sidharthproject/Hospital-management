@@ -2,11 +2,11 @@
 
 async function uploadImageToCloudinary(file) {
   const cloudName = import.meta.env.VITE_CLOUD_NAME;
-  const uploadPreset = import.meta.env.VITE_PRESET_NAME;
+  const uploadPreset = " doctor-booking-system"
 
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('uploadPreset', uploadPreset);
+  formData.append('upload_preset', uploadPreset);
   formData.append('cloudName', cloudName);
 
   // Debug: Log form data
