@@ -1,8 +1,8 @@
 // utils/uploadCloudinary.js
 
 async function uploadImageToCloudinary(file) {
-  const cloudName = 'dejf17sia';
-  const uploadPreset = 'doctor-booking-system'; // Your upload preset
+  const cloudName = import.meta.env.VITE_CLOUD_NAME;
+  const uploadPreset = import.meta.env.VITE_PRESET_NAME;
 
   const formData = new FormData();
   formData.append('file', file);
