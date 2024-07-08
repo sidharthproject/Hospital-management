@@ -9,6 +9,7 @@ import DoctorDetails from '../Pages/Doctors/DoctorDetails'
 import {Routes,Route} from 'react-router-dom'
 import ProtectedRoute from '../Components/routes/ProtectedRoute'
 import Dashboard from '../Dashboard/doctorAccount/Dashboard'
+import MyAccount from '../Dashboard/userAccount/MyAccount'
 function Routers() {
   return (
           <Routes>
@@ -24,7 +25,7 @@ function Routers() {
               path="users/profile/me"
               element={
                 <ProtectedRoute allowedRoles={['patient']}>
-                  <MyAccount />
+                  <MyAccount/>
                 </ProtectedRoute>
               }
             />
