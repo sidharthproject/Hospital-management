@@ -1,20 +1,17 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import './App.css';
-import Header from './Components/Header/Header';
-import Footer from './Components/Footer/Footer';
-import { Toaster } from 'react-hot-toast';
 
+import './App.css';
+
+import { Toaster } from 'react-hot-toast';
+import Layout from './Components/layout/Layout';
 function App() {
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+   <Layout/>
       <div>
         <Toaster position="top-right" />
       </div>
-    </>
+ </>
   );
 }
 
