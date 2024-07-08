@@ -1,5 +1,5 @@
-.env
-/backend/config
-/frontend/.env.local
-node_modules
-log
+*.env
+*/backend/config
+*/frontend/.env.local
+*node_modules
+*log
