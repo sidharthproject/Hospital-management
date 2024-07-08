@@ -19,7 +19,7 @@ function MyAccount() {
 
   const logOutHandler = async () => {
     try {
-      const response = await fetch('http://localhost:9000/api/v1/auth/logout', {
+      const response = await fetch('https://hospital-management-y4tp.onrender.com/api/v1/auth/logout', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

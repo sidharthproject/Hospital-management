@@ -154,7 +154,7 @@ function Profile({ user }) {
               type="file"
               name="photo"
               id="customFile"
-              accept='.jpg, .png'
+              accept='.jpg , .png'
               onChange={handleFileinputChange}
               className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
             />
