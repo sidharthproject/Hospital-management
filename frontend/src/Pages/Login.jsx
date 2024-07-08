@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Link ,useNavigate} from 'react-router-dom'
 import { BASE_URL } from '../config.js'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../store/authSlice.js'
+import { useSelector } from 'react-redux'
 import HashLoader from 'react-spinners/HashLoader'
 function Login() {
+  const token = useSelector(state => state.auth.token)
   const[formData,setFormData] =useState({
     email:'',
     password:''
@@ -16,6 +18,12 @@ function Login() {
  const handleInputChange = (e)=>{
      setFormData({...formData,[e.target.name]:e.target.value})
   }
+  useEffect(() => {
+    if (token) {
+      navigate('/'); 
+    }
+  }, [token, navigate]);
+  
   const submitHandler = async (event) => {
     event.preventDefault();
     setLoading(true);
