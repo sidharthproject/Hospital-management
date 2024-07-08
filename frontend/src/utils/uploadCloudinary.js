@@ -1,5 +1,5 @@
 const cloud_name = import.meta.env.VITE_CLOUD_NAME;
-const upload_preset = import.meta.env.VITE_PRESET_NAME ;
+const upload_preset = " doctor-booking-system ";
 
 
 import axios from 'axios';
