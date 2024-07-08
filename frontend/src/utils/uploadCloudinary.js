@@ -1,5 +1,8 @@
 const cloud_name = import.meta.env.VITE_CLOUD_NAME;
 const upload_preset = import.meta.env.VITE_PRESET_NAME;
+
+console.log('Cloud Name:', cloud_name); // Should log your Cloudinary cloud name
+console.log('Upload Preset:', upload_preset);
 import axios from 'axios';
 
 const uploadImageToCloudinary = async (file) => {
@@ -7,7 +10,8 @@ const uploadImageToCloudinary = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', upload_preset);
-
+  console.log('URL:', url); // Should log the correct Cloudinary URL
+  console.log('Form Data:', formData); 
   try {
     const response = await axios.post(url, formData);
     return response.data;
