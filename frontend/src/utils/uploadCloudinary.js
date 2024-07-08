@@ -1,25 +1,37 @@
-const cloud_name = import.meta.env.VITE_CLOUD_NAME;
-const upload_preset = " doctor-booking-system ";
+// utils/uploadCloudinary.js
 
+async function uploadImageToCloudinary(file) {
+  const cloudName = 'dejf17sia';
+  const uploadPreset = 'doctor-booking-system'; // Your upload preset
 
-import axios from 'axios';
-
-const uploadImageToCloudinary = async (file) => {
-  const url = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', upload_preset);
-  console.log('URL:', url); // Should log the correct Cloudinary URL
-  console.log('Form Data:', formData); console.log('Cloud Name:', cloud_name); // Should log your Cloudinary cloud name
-console.log('Upload Preset:', upload_preset);
-  try {
-    const response = await axios.post(url, formData);
-    return response.data;
-  } catch (error) {
-    console.error('Error uploading image to Cloudinary:', error);
-    throw error;
+  formData.append('upload_preset', uploadPreset);
+  formData.append('cloudName', cloudName);
+
+  // Debug: Log form data
+  for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
   }
-};
+
+  try {
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+          method: 'POST',
+          body: formData,
+      });
+
+      if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Error response:', errorData);
+          throw new Error(`Failed to upload image: ${errorData.error.message}`);
+      }
+
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error('Error uploading image:', error);
+      return null;
+  }
+}
 
 export default uploadImageToCloudinary;
-
